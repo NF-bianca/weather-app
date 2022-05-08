@@ -24,7 +24,7 @@ body {
 }
 
 .container {
-  background-color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(134, 200, 255, 0.85);
   padding: 15px 25px;
   border-radius: 20px;
   margin: 100px;
@@ -40,8 +40,12 @@ h2 {
   font-size: 24px;
 }
 
-.snow-icon {
-  font-size: 28px;
+#weather-icon {
+  font-size: 60px;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 ul {
@@ -58,6 +62,9 @@ ul li {
   font-weight: normal;
 }
 
+small#description {
+  text-transform: capitalize;
+}
 .row {
   margin: 0 auto;
 }
@@ -73,6 +80,21 @@ p {
 
 small {
   opacity: 0.7;
+}
+
+strong {
+  font-size: 20px;
+}
+
+footer {
+  margin-bottom: 90px;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: monospace;
+}
+
+span.unit {
+  font-size: 22px;
 }
 
 .row-forecast {
@@ -137,11 +159,4 @@ p.five-days {
   position: static;
   top: 30px;
   right: 120px;
-}
-
-footer {
-  margin-bottom: 90px;
-  font-size: 20px;
-  font-weight: bold;
-  font-family: monospace;
 }

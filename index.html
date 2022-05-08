@@ -16,7 +16,7 @@
     <div class="header">
      <form>
       <div class="change-location">
-        <input type="text" placeholder="Change Location" autocomplete="off" autofocus="on" class="location" />
+        <input type="text" placeholder="Type Location" autocomplete="off" autofocus="on" class="location" />
         <input type="submit" value="Search" id="search-button"/>
       </div>
      </form>
@@ -26,28 +26,33 @@
       <button id="current-location">Your current location</button>
     </div>
     <div class="container">
-      <h1>Lucerne, Switzerland</h1>
+      <h1>Type location in search bar</h1>
       <h2 id="date">Sunday 3 April, 2022</h2>
-    <br />
-    <p>
-      <i class="fa-solid fa-cloud-sun"></i>
-      <h3><strong><span id="temp">17</span>&deg</strong>
-        <span class="unit">C</span>
-        </small>Mostly sunny</small></h3>
-    </p>
-    
+    <br />  
+      <img
+        src="https://ssl.gstatic.com/onebox/weather/64/rain_light.png"
+        alt="Clear"
+        width="120px" 
+        id="weather-icon"
+      />
+      <h3 class="weather-description">
+        <strong id="temp"></strong>
+        <span class="unit">&deg;C|<a href="#" id="fahrenheit">F</a></span>
+        <div><small id="description"></small></div>
+      </h3>
+    <br>
         <div class="row">
           <div class="col-sm-6">
             <ul>
-              <li><small>Min </small> <strong>4&deg C</strong></li>
-              <li><small>Max </small> <strong>18&deg C</strong></li>
+              <li><small>Max: </small><strong id="temp-max"></strong>&deg;C|<a href="#" id="fahrenheit">F</a></li>
+              <li><small>Min: </small><strong id="temp-min"></strong>&deg;C|<a href="#" id="fahrenheit">F</a></li>
             </ul>
           </div>
             
           <div class="col-sm-6">
             <ul>
-              <li>Sunrise  <strong>07:04</strong></li>
-              <li>Sunset  <strong>19:57</strong></li>
+              <li>Humidity: <strong id="humidity"></strong>%</li>
+              <li>Wind: <strong id="wind"></strong> m/s</li>
             </ul>
           </div>
         </div>
@@ -59,39 +64,37 @@
        <div class="col">Monday<br />
           <i class="fa-solid fa-cloud-sun"></i>
           <br />
-          <small>Min </small> <strong>7&degC</strong>
+          <small>Max: </small><span><strong>7</strong>&degC</span>
           <br />
-          <small>Max </small> <strong>16&degC</strong>
+          <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
        <div class="col">Tuesday<br />
          <i class="fa-solid fa-cloud-showers-heavy"></i>
          <br />
-         <small>Min </small>
-         <strong>10&degC</strong>
+         <small>Max: </small><span><strong>7</strong>&degC</span>
          <br />
-         <small>Max </small>
-         <strong>17&degC</strong>
+         <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
        <div class="col">Wednesday<br />
               <i class="fa-solid fa-cloud-sun"></i>
               <br />
-              <small>Min </small><strong>7&degC</strong>
+              <small>Max: </small><span><strong>7</strong>&degC</span>
               <br />
-              <small>Max </small><strong>15&degC</strong>
+              <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
        <div class="col">Thursday<br />
               <i class="fa-solid fa-cloud-sun-rain"></i>
               <br />
-              <small>Min </small> <strong>6&degC</strong>
+              <small>Max: </small><span><strong>7</strong>&degC</span>
               <br />
-              <small>Max </small><strong>13&degC</strong>
+              <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
        <div class="col">Friday<br />
               <i class="fa-solid fa-cloud-sun-rain"></i>
               <br />
-              <small>Min </small> <strong>7&degC</strong>
+              <small>Max: </small><span><strong>7</strong>&degC</span>
               <br />
-              <small>Max </small> <strong>12&degC</strong>
+              <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
      </div> 
     </div>

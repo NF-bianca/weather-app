@@ -38,37 +38,58 @@ function showDate(newDate) {
   h2.innerHTML = `${date}, ${currentTime}`;
 }
 
-console.log(showDate(new Date()));
+let city = "Paris";
+let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
 
 function createWeatherApiLink(city) {
   let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
-  let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-  return url;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  return apiUrl;
 }
 
 function createWeatherApiLinkByCoords(lat, lon) {
   let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
-  let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
-  return url;
+  let geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  return geoApiUrl;
 }
 
-function displayWeather(response) {
+function showCity(response) {
   let cityName = response.data.name;
-  let temperature = Math.round(response.data.main.temp);
-
   let h1 = document.querySelector("h1");
-  h1.innerHTML = `${cityName}, ${temperature} &deg;C`;
+  h1.innerHTML = cityName;
 }
 
 function displayDescription(response) {
-  let weatherDescription = response.data.weather[0].description;
+  let descriptionElement = document.querySelector("#description");
+  descriptionElement.innerHTML = response.data.weather[0].description;
 
-  let h3 = document.querySelector("h3");
-  h3.innerHTML = weatherDescription;
+  let temperature = Math.round(response.data.main.temp);
+  let temperatureElement = document.querySelector("#temp");
+  temperatureElement.innerHTML = temperature;
+
+  let iconElement = document.querySelector("#weather-icon");
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  let humidityElement = document.querySelector("#humidity");
+  humidityElement.innerHTML = response.data.main.humidity;
+
+  let windElement = document.querySelector("#wind");
+  windElement.innerHTML = Math.round(response.data.wind.speed);
+
+  let maxTemp = document.querySelector("#temp-max");
+  maxTemp.innerHTML = Math.round(response.data.main.temp_max);
+
+  let minTemp = document.querySelector("#temp-min");
+  minTemp.innerHTML = Math.round(response.data.main.temp_min);
 }
 
 function displayData(response) {
-  displayWeather(response);
+  showCity(response);
   displayDescription(response);
 }
 
