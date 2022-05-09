@@ -1,4 +1,12 @@
-function showDate(newDate) {
+function formatDate(timestamp) {
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  let city = "Paris";
+  let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
+  let dateApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+
+  let date = new Date(timestamp);
   let days = [
     "Sunday",
     "Monday",
@@ -8,7 +16,7 @@ function showDate(newDate) {
     "Friday",
     "Saturday",
   ];
-  let currentDay = days[newDate.getDay()];
+  let currentDay = days[date.getDay()];
 
   let months = [
     "Jan",
@@ -24,18 +32,15 @@ function showDate(newDate) {
     "Nov",
     "Dec",
   ];
-  let currentMonth = months[newDate.getMonth()];
+  let currentMonth = months[date.getMonth()];
 
-  let currentDate = newDate.getDate();
-  let currentYear = newDate.getFullYear();
-  let date = `${currentDay}, ${currentMonth} ${currentDate}, ${currentYear}`;
+  let currentDate = date.getDate();
+  let currentYear = date.getFullYear();
+  let hour = String(date.getHours()).padStart(2, "0");
+  let minutes = String(date.getMinutes()).padStart(2, "0");
+  return `${currentDay}, ${currentMonth} ${currentDate}, ${currentYear}, ${hour}:${minutes}`;
 
-  let hour = String(newDate.getHours()).padStart(2, "0");
-  let minutes = String(newDate.getMinutes()).padStart(2, "0");
-  let currentTime = `${hour}:${minutes}`;
-
-  let h2 = document.querySelector("h2");
-  h2.innerHTML = `${date}, ${currentTime}`;
+  axios.get(formatDate(timestamp));
 }
 
 let city = "Paris";
