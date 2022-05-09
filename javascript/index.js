@@ -1,11 +1,4 @@
 function formatDate(timestamp) {
-  let dateElement = document.querySelector("#date");
-  dateElement.innerHTML = formatDate(response.data.dt * 1000);
-
-  let city = "Paris";
-  let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
-  let dateApiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-
   let date = new Date(timestamp);
   let days = [
     "Sunday",
@@ -39,8 +32,6 @@ function formatDate(timestamp) {
   let hour = String(date.getHours()).padStart(2, "0");
   let minutes = String(date.getMinutes()).padStart(2, "0");
   return `${currentDay}, ${currentMonth} ${currentDate}, ${currentYear}, ${hour}:${minutes}`;
-
-  axios.get(formatDate(timestamp));
 }
 
 let city = "Paris";
@@ -91,6 +82,9 @@ function displayDescription(response) {
 
   let minTemp = document.querySelector("#temp-min");
   minTemp.innerHTML = Math.round(response.data.main.temp_min);
+
+  let dateElement = document.querySelector("#date");
+  dateElement.innerHTML = formatDate(response.data.dt * 1000);
 }
 
 function displayData(response) {
