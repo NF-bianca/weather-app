@@ -34,19 +34,15 @@ function formatDate(timestamp) {
   return `${currentDay}, ${currentMonth} ${currentDate}, ${currentYear}, ${hour}:${minutes}`;
 }
 
-let city = "Paris";
-let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
-
+const apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
+const baseWeatherUrl = "https://api.openweathermap.org/data/2.5/weather";
 function createWeatherApiLink(city) {
-  let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+  let apiUrl = `${baseWeatherUrl}?q=${city}&units=metric&appid=${apiKey}`;
   return apiUrl;
 }
 
 function createWeatherApiLinkByCoords(lat, lon) {
-  let apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
-  let geoApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+  let geoApiUrl = `${baseWeatherUrl}?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
   return geoApiUrl;
 }
 
@@ -60,7 +56,8 @@ function displayDescription(response) {
   let descriptionElement = document.querySelector("#description");
   descriptionElement.innerHTML = response.data.weather[0].description;
 
-  let temperature = Math.round(response.data.main.temp);
+  let celsiusTemp = response.data.main.temp;
+  let temperature = Math.round(celsiusTemp);
   let temperatureElement = document.querySelector("#temp");
   temperatureElement.innerHTML = temperature;
 
@@ -121,5 +118,91 @@ function getCurrentLocation() {
   navigator.geolocation.getCurrentPosition(showCurrentLocation);
 }
 
+function displayFahrenheitTemp(event) {
+  event.preventDefault();
+  let fahrenheitElement = document.querySelector("#fahrenheit");
+  let celsiusElement = document.querySelector("#celsius");
+  let temperatureElement = document.querySelector("#temp");
+
+  if (fahrenheitElement.classList.contains("active")) {
+    return;
+  }
+  celsiusElement.classList.remove("active");
+  fahrenheitElement.classList.add("active");
+
+  let celsiusTemp = temperatureElement.innerHTML;
+  let fahrenheitTemp = celsiusTemp * 1.8 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemp);
+}
+
+function displayCelsiusTemp(event) {
+  event.preventDefault();
+
+  let fahrenheitElement = document.querySelector("#fahrenheit");
+  let celsiusElement = document.querySelector("#celsius");
+  let temperatureElement = document.querySelector("#temp");
+
+  if (celsiusElement.classList.contains("active")) {
+    return;
+  }
+
+  celsiusElement.classList.add("active");
+  fahrenheitElement.classList.remove("active");
+
+  let fahrenheitTemp = temperatureElement.innerHTML;
+  let celsiusTemp = ((fahrenheitTemp - 32) * 5) / 9;
+  temperatureElement.innerHTML = Math.round(celsiusTemp);
+}
+
 let button = document.querySelector("#current-location");
 button.addEventListener("click", getCurrentLocation);
+
+let fahrenheitUnit = document.querySelector("#fahrenheit");
+fahrenheitUnit.addEventListener("click", displayFahrenheitTemp);
+
+let celsiusUnit = document.querySelector("#celsius");
+celsiusUnit.addEventListener("click", displayCelsiusTemp);
+
+/*
+function displayMaxFahrenheitTemp(event) {
+  event.preventDefault();
+  let maxFahrenheitElement = document.querySelector("#max-fahrenheit");
+  let maxCelsiusElement = document.querySelector("#max-celsius");
+  let maxTemperatureElement = document.querySelector("#max-temp");
+
+  if (maxFahrenheitElement.classList.contains("active")) {
+    return;
+  }
+  maxCelsiusElement.classList.remove("active");
+  maxFahrenheitElement.classList.add("active");
+
+  let maxCelsiusTemp = maxTemperatureElement.innerHTML;
+  let maxFahrenheitTemp = maxCelsiusTemp * 1.8 + 32;
+  maxTemperatureElement.innerHTML = Math.round(maxFahrenheitTemp);
+}
+
+function displayMaxCelsiusTemp(event) {
+  event.preventDefault();
+
+  let maxFahrenheitElement = document.querySelector("#max-fahrenheit");
+  let maxCelsiusElement = document.querySelector("#max-celsius");
+  let maxTemperatureElement = document.querySelector("#max-temp");
+
+  if (maxCelsiusElement.classList.contains("active")) {
+    return;
+  }
+
+  maxCelsiusElement.classList.add("active");
+  maxFahrenheitElement.classList.remove("active");
+
+  let maxFahrenheitTemp = maxTemperatureElement.innerHTML;
+  let maxCelsiusTemp = ((maxFahrenheitTemp - 32) * 5) / 9;
+  maxTemperatureElement.innerHTML = Math.round(maxCelsiusTemp);
+}
+
+let maxFahrenheitUnit = document.querySelector("#max-fahrenheit");
+maxFahrenheitUnit.addEventListener("click", displayMaxFahrenheitTemp);
+
+let maxCelsiusUnit = document.querySelector("#max-celsius");
+maxCelsiusUnit.addEventListener("click", displayMaxCelsiusTemp);
+*/

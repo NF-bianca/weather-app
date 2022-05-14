@@ -161,3 +161,14 @@ p.five-days {
   top: 30px;
   right: 120px;
 }
+
+.degree {
+  color: #3d546a;
+  font-size: 20px;
+}
+
+.weather-description .active {
+  cursor: default;
+  text-decoration: none;
+  color: #3d546a;
+}
