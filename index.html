@@ -44,8 +44,8 @@
         <div class="row">
           <div class="col-sm-6">
             <ul>
-              <li><small>Max: </small><strong id="temp-max"></strong>&deg;<a href="#" id="max-celsius" class="active">C</a>|<a href="#" id="max-fahrenheit">F</a></li>
-              <li><small>Min: </small><strong id="temp-min"></strong>&deg;<a href="#" id="min-celsius" class="active">C</a>|<a href="#" id="min-fahrenheit">F</a></li>
+              <li><small>Max: </small><strong id="max-temp"></strong>&deg;<a href="#" id="max-celsius" class="active">C</a>|<a href="#" id="max-fahrenheit">F</a></li>
+              <li><small>Min: </small><strong id="min-temp"></strong>&deg;<a href="#" id="min-celsius" class="active">C</a>|<a href="#" id="min-fahrenheit">F</a></li>
             </ul>
           </div>
             
@@ -60,42 +60,39 @@
     <hr />  
     <p class="five-days">5 Days Forecast</p>
      
-    <div class="row row-forecast">
-       <div class="col">Monday<br />
-          <i class="fa-solid fa-cloud-sun"></i>
-          <br />
-          <small>Max: </small><span><strong>7</strong>&degC</span>
-          <br />
-          <small>Min: </small><span><strong>7</strong>&degC</span>
-       </div>
-       <div class="col">Tuesday<br />
-         <i class="fa-solid fa-cloud-showers-heavy"></i>
+    <div class="row row-forecast" id="forecast">
+      <!--
+       <div class="col" id="Mon">Monday<br />
          <br />
          <small>Max: </small><span><strong>7</strong>&degC</span>
          <br />
          <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
-       <div class="col">Wednesday<br />
-              <i class="fa-solid fa-cloud-sun"></i>
-              <br />
-              <small>Max: </small><span><strong>7</strong>&degC</span>
-              <br />
-              <small>Min: </small><span><strong>7</strong>&degC</span>
+       <div class="col" id="Tue">Tuesday<br />
+         <br />
+         <small>Max: </small><span><strong>7</strong>&degC</span>
+         <br />
+         <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
-       <div class="col">Thursday<br />
-              <i class="fa-solid fa-cloud-sun-rain"></i>
-              <br />
-              <small>Max: </small><span><strong>7</strong>&degC</span>
-              <br />
-              <small>Min: </small><span><strong>7</strong>&degC</span>
+       <div class="col" id="Wed">Wednesday<br />
+         <br />
+         <small>Max: </small><span><strong>7</strong>&degC</span>
+         <br />
+         <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
-       <div class="col">Friday<br />
-              <i class="fa-solid fa-cloud-sun-rain"></i>
-              <br />
-              <small>Max: </small><span><strong>7</strong>&degC</span>
-              <br />
-              <small>Min: </small><span><strong>7</strong>&degC</span>
+       <div class="col" id="Thu">Thursday<br />
+         <br />
+         <small>Max: </small><span><strong>7</strong>&degC</span>
+         <br />
+         <small>Min: </small><span><strong>7</strong>&degC</span>
        </div>
+       <div class="col" id="Fri">Friday<br />
+         <br />
+         <small>Max: </small><span><strong>7</strong>&degC</span>
+         <br />
+         <small>Min: </small><span><strong>7</strong>&degC</span>
+       </div>
+      //-->   
      </div> 
     </div>
     <footer>
@@ -103,10 +100,6 @@
         target="_blank">View my code on GitHub
         </a>
     </footer>
-    <script
-      src="https://kit.fontawesome.com/61bcb06f7f.js"
-      crossorigin="anonymous"
-    ></script>
     <script src="javascript/index.js"></script>
    </div>
   </body>

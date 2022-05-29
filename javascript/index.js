@@ -51,6 +51,47 @@ function showCity(response) {
   let h1 = document.querySelector("h1");
   h1.innerHTML = cityName;
 }
+function displayForecast(response) {
+  const dailyForecasts = response.data.daily;
+
+  const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  let htmlForecastContent = "";
+
+  dailyForecasts.forEach(function (dayForecast, index) {
+    if (index > 4) {
+      return;
+    }
+
+    const max = Math.round(dayForecast.temp.max);
+    const min = Math.round(dayForecast.temp.min);
+    const icon = dayForecast.weather[0].icon;
+
+    htmlForecastContent += ` 
+       <div class="col" id="day-${index}">${dayNames[index]}<br />
+       <img
+          src="http://openweathermap.org/img/wn/${icon}@2x.png"
+          alt=""
+          width="42"
+        />
+         <br />
+         <small>Max: </small><span><strong>${max}</strong>&degC</span>
+         <br />
+         <small>Min: </small><span><strong>${min}</strong>&degC</span>
+       </div>`;
+  });
+
+  // displaying the dynamic content on the page:
+  let htmlForecast = document.querySelector("#forecast");
+  htmlForecast.innerHTML = htmlForecastContent;
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  const apiKey = "e6db7c6cb2c48b291ca96f8139791e58";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
 
 function displayDescription(response) {
   let descriptionElement = document.querySelector("#description");
@@ -74,14 +115,16 @@ function displayDescription(response) {
   let windElement = document.querySelector("#wind");
   windElement.innerHTML = Math.round(response.data.wind.speed);
 
-  let maxTemp = document.querySelector("#temp-max");
+  let maxTemp = document.querySelector("#max-temp");
   maxTemp.innerHTML = Math.round(response.data.main.temp_max);
 
-  let minTemp = document.querySelector("#temp-min");
+  let minTemp = document.querySelector("#min-temp");
   minTemp.innerHTML = Math.round(response.data.main.temp_min);
 
   let dateElement = document.querySelector("#date");
   dateElement.innerHTML = formatDate(response.data.dt * 1000);
+
+  getForecast(response.data.coord);
 }
 
 function displayData(response) {
@@ -163,7 +206,6 @@ fahrenheitUnit.addEventListener("click", displayFahrenheitTemp);
 let celsiusUnit = document.querySelector("#celsius");
 celsiusUnit.addEventListener("click", displayCelsiusTemp);
 
-/*
 function displayMaxFahrenheitTemp(event) {
   event.preventDefault();
   let maxFahrenheitElement = document.querySelector("#max-fahrenheit");
@@ -205,4 +247,45 @@ maxFahrenheitUnit.addEventListener("click", displayMaxFahrenheitTemp);
 
 let maxCelsiusUnit = document.querySelector("#max-celsius");
 maxCelsiusUnit.addEventListener("click", displayMaxCelsiusTemp);
-*/
+
+function displayMinFahrenheitTemp(event) {
+  event.preventDefault();
+  let minFahrenheitElement = document.querySelector("#min-fahrenheit");
+  let minCelsiusElement = document.querySelector("#min-celsius");
+  let minTemperatureElement = document.querySelector("#min-temp");
+
+  if (minFahrenheitElement.classList.contains("active")) {
+    return;
+  }
+  minCelsiusElement.classList.remove("active");
+  minFahrenheitElement.classList.add("active");
+
+  let minCelsiusTemp = minTemperatureElement.innerHTML;
+  let minFahrenheitTemp = minCelsiusTemp * 1.8 + 32;
+  minTemperatureElement.innerHTML = Math.round(minFahrenheitTemp);
+}
+
+function displayMinCelsiusTemp(event) {
+  event.preventDefault();
+
+  let minFahrenheitElement = document.querySelector("#min-fahrenheit");
+  let minCelsiusElement = document.querySelector("#min-celsius");
+  let minTemperatureElement = document.querySelector("#min-temp");
+
+  if (minCelsiusElement.classList.contains("active")) {
+    return;
+  }
+
+  minCelsiusElement.classList.add("active");
+  minFahrenheitElement.classList.remove("active");
+
+  let minFahrenheitTemp = minTemperatureElement.innerHTML;
+  let minCelsiusTemp = ((minFahrenheitTemp - 32) * 5) / 9;
+  minTemperatureElement.innerHTML = Math.round(minCelsiusTemp);
+}
+
+let minFahrenheitUnit = document.querySelector("#min-fahrenheit");
+minFahrenheitUnit.addEventListener("click", displayMinFahrenheitTemp);
+
+let minCelsiusUnit = document.querySelector("#min-celsius");
+minCelsiusUnit.addEventListener("click", displayMinCelsiusTemp);
